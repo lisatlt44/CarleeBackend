@@ -13,6 +13,8 @@ jobs:
     
     - name: 📂 Sync files
       uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+      local-dir: C:\wamp64\www\CarleeBackend\
+      server-dir: /carlee/
       with:
         server: node15-fr.n0c.com
         username: contact@lisa-tallet.mds-nantes.yt
