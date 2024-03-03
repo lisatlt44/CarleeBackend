@@ -19,4 +19,4 @@ jobs:
         password: ${{ secrets.ftp_password }}
         port: 21
         server-dir: ./www/CarleeBackend/
-        local-dir: /carlee/
+        local-dir: ./carlee/
