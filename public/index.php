@@ -54,4 +54,4 @@ $response = $kernel->handle(
 
 $kernel->terminate($request, $response);
 
-echo('coucou');
+echo('coucouuuuu toi');
