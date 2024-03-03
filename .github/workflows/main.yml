@@ -18,5 +18,5 @@ jobs:
         username: contact@lisa-tallet.mds-nantes.yt
         password: ${{ secrets.ftp_password }}
         port: 21
-        local-dir: ./www/CarleeBackend/
-        server-dir: /carlee/
+        server-dir: ./www/CarleeBackend/
+        local-dir: /carlee/
