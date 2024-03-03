@@ -17,3 +17,4 @@ jobs:
         server: node15-fr.n0c.com
         username: contact@lisa-tallet.mds-nantes.yt
         password: ${{ secrets.ftp_password }}
+        port: 21
