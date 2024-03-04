@@ -17,4 +17,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/api/user', '\App\Http\Controllers\Test@test');
+Route::get('/user', '\App\Http\Controllers\Test@test');
