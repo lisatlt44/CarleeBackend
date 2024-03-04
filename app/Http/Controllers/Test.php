@@ -9,6 +9,6 @@ class Test extends Controller
 {
   public function test() {
     $user = UserTest::all();
-    return $user;
+    return response()->json($user);
   }
 }
