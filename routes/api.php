@@ -15,5 +15,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+   return $request->user();
+});
+
+// Structure d'authentification
+Route::post('/register', 'UserController@register');
+Route::post('/login', 'UserController@login');
+Route::middleware('auth:api')->group(function () {
+  // CRUD operations for users
+  Route::get('/user/{id}', 'UserController@show');
+  Route::put('/user/{id}', 'UserController@update');
+  Route::delete('/user/{id}', 'UserController@destroy');
 });

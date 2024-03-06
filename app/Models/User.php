@@ -40,7 +40,8 @@ class User extends Authenticatable
     'birth_date',
     'phone',
     'password',
-    'remember_token'
+    'remember_token',
+    'is_active'
   ];
 
   /**
