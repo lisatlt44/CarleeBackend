@@ -27,3 +27,11 @@ Route::middleware('auth:api')->group(function () {
   Route::put('/user/{id}', 'UserController@update');
   Route::delete('/user/{id}', 'UserController@destroy');
 });
+
+Route::middleware('auth:api')->group(function () {
+  // CRUD operations for cars
+  Route::post('/cars', 'CarController@store');
+  Route::get('/cars/{id}', 'CarController@show');
+  Route::put('/cars/{id}', 'CarController@update');
+  Route::delete('/cars/{id}', 'CarController@destroy');
+});
