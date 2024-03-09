@@ -69,6 +69,6 @@ class UserController extends Controller
     $user->update(['is_active' => false]);
 
     // Retourner une réponse JSON pour indiquer que l'utilisateur a été désactivé avec succès
-    return response()->json(['message' => 'L\'utilisateur a correctement été désactivé.']);
+    return response()->json(['message' => 'L\'utilisateur a correctement été désactivé.'], 200);
   }
 }

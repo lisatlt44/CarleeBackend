@@ -24,7 +24,7 @@ class Indicator extends Model
    *
    * @var string
    */
-  protected $primaryKey = 'id_indicator';
+  protected $primaryKey = 'id';
 
   /**
    * The attributes that are mass assignable.
@@ -32,10 +32,10 @@ class Indicator extends Model
    * @var array
    */
   protected $fillable = [
-    'indicator_name',
+    'name',
     'description',
     'category',
-    'indicator_color',
-    'indicator_image'
+    'color',
+    'picture'
   ];
 }

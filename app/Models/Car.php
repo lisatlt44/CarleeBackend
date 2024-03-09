@@ -24,7 +24,7 @@ class Car extends Model
    *
    * @var string
    */
-  protected $primaryKey = 'id_car';
+  protected $primaryKey = 'id';
 
   /**
    * The attributes that are mass assignable.
@@ -42,6 +42,7 @@ class Car extends Model
     'plate_number',
     'mileage',
     'last_maintenance_date',
+    'is_active',
     'user_id'
   ];
 
@@ -52,7 +53,7 @@ class Car extends Model
    */
   protected $casts = [
     'production_date' => 'datetime',
-    'last_maintenance_date' => 'datetime',
+    'last_maintenance_date' => 'datetime'
   ];
 
   /**

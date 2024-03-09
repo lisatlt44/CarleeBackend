@@ -25,7 +25,7 @@ class User extends Authenticatable
    *
    * @var string
    */
-  protected $primaryKey = 'id_user';
+  protected $primaryKey = 'id';
 
   /**
    * The attributes that are mass assignable.
@@ -51,7 +51,7 @@ class User extends Authenticatable
    */
   protected $hidden = [
     'password',
-    'remember_token',
+    'remember_token'
   ];
 
   /**
@@ -61,5 +61,6 @@ class User extends Authenticatable
    */
   protected $casts = [
     'email_verified_at' => 'datetime',
+    'birth_date' => 'datetime'
   ];
 }

@@ -24,7 +24,7 @@ class Document extends Model
    *
    * @var string
    */
-  protected $primaryKey = 'id_document';
+  protected $primaryKey = 'id';
 
   /**
    * The attributes that are mass assignable.
@@ -32,10 +32,12 @@ class Document extends Model
    * @var array
    */
   protected $fillable = [
+    'name',
     'type',
     'file',
     'file_size',
-    'car_id',
+    'is_active',
+    'car_id'
   ];
 
   /**
