@@ -40,7 +40,7 @@ class CarController extends Controller
       'fuel_type' => 'sometimes|required|string|max:55',
       'production_date' => 'sometimes|required|date|before_or_equal:today|after_or_equal:1900-01-01', // format Y-m-d
       'country_iso_code' => 'nullable|string|max:2',
-      'plate_number' => 'sometimes|required|string|unique:cars|regex:/^[A-Z]{2}-[0-9]{3}-[A-Z]{2}$/i',
+      'plate_number' => 'sometimes|required|string|unique:cars|regex:/^[A-Z]{2}-[0-9]{3}-[A-Z]{2}$/i', // format xx-xxx-xx
       'mileage' => 'sometimes|required|integer|min:0',
       'last_maintenance_date' => 'sometimes|required|date|before_or_equal:today|after_or_equal:production_date', // format Y-m-d
       'user_id' => 'sometimes|required|exists:users,id'
@@ -75,30 +75,29 @@ class CarController extends Controller
    */
   public function update(Request $request, $id)
   {
-    // Validation des données de la requête
-    $request->validate([
-      'name' => 'required|string|max:55',
-      'brand' => 'required|string|max:55',
-      'model' => 'required|string|max:55',
-      'color' => 'nullable|string|max:55',
-      'fuel_type' => 'required|string|max:55',
-      'production_date' => 'required|date',
-      'country_iso_code' => 'nullable|string|max:2',
-      'plate_number' => 'required|string|unique:cars,plate_number,'.$id.'|regex:/^[A-Z0-9]{1,10}$/i',
-      'mileage' => 'required|integer|min:0',
-      'last_maintenance_date' => 'required|date|after_or_equal:production_date',
-      'is_active' => 'nullable|boolean',
-      'user_id' => 'required|exists:users,id'
-    ]);
-
-    // Recherche de la voiture par ID
+    // Récupérer la voiture en fonction de son ID
     $car = Car::findOrFail($id);
 
+    // Validation des données de la requête
+    $validatedData = $request->validate([
+      'name' => 'sometimes|required|string|max:55',
+      'brand' => 'sometimes|required|string|max:55',
+      'model' => 'sometimes|required|string|max:55',
+      'color' => 'nullable|string|max:55',
+      'fuel_type' => 'sometimes|required|string|max:55',
+      'production_date' => 'sometimes|required|date|before_or_equal:today|after_or_equal:1900-01-01', // format Y-m-d'
+      'country_iso_code' => 'nullable|string|max:2',
+      'plate_number' => 'sometimes|required|string|unique:cars,plate_number,'.$id.'|regex:/^[A-Z]{2}-[0-9]{3}-[A-Z]{2}$/i', // format xx-xxx-xx
+      'mileage' => 'sometimes|required|integer|min:0',
+      'last_maintenance_date' => 'sometimes|required|date|before_or_equal:today|after_or_equal:production_date', // format Y-m-d
+      'user_id' => 'sometimes|required|exists:users,id'
+    ]);
+
     // Mise à jour des détails de la voiture
-    $car->update($request->all());
+    $car->update($validatedData);
 
     // Réponse avec la voiture mise à jour
-    return response()->json($car);
+    return response()->json(['message' => 'Les informations de la voiture avec l\'id ' . $id . ' ont correctement été modifiées.', 'data' => $car]);
   }
 
   /**

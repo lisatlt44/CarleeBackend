@@ -46,7 +46,6 @@ class UserController extends Controller
       'phone' => ['nullable', 'string', 'regex:/^0\d{9}$/'],
       'password' => 'sometimes|required|string|min:8',
       'remember_token' => 'nullable|string|max:255',
-      'is_active' => 'nullable|boolean'
     ]);
 
     // Hasher le mot de passe si fourni
