@@ -35,7 +35,6 @@ class DocumentController extends Controller
       'name' => 'required|string|max:255',
       'type' => 'required|string|max:55',
       'file' => 'required|file|max:10240',
-      'file_size' => 'nullable|integer',
       'car_id' => 'required|exists:cars,id',
     ]);
 
@@ -51,6 +50,7 @@ class DocumentController extends Controller
     $document->type = $request->input('type');
     $document->file = $path;
     $document->file_size = $file->getSize();
+    $document->is_active = true;
     $document->car_id = $request->input('car_id');
     $document->save();
 
