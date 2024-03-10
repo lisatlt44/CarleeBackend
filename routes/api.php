@@ -24,7 +24,7 @@ Route::post('/register', 'UserController@register');
 Route::post('/login', 'UserController@login');
 // Route::middleware('auth:api')->group(function () {
   // CRUD operations for users
-  Route::get('/users/{id}', 'UserController@show');
+  Route::get('/users/{id}', '\App\Http\Controllers\UserController@show');
   Route::put('/users/{id}', 'UserController@update');
   Route::delete('/users/{id}', 'UserController@destroy');
 // });
