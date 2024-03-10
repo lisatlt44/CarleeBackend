@@ -38,11 +38,11 @@ class CarController extends Controller
       'model' => 'sometimes|required|string|max:55',
       'color' => 'nullable|string|max:55',
       'fuel_type' => 'sometimes|required|string|max:55',
-      'production_date' => 'sometimes|required|date|before_or_equal:today|after_or_equal:1900-01-01',
+      'production_date' => 'sometimes|required|date|before_or_equal:today|after_or_equal:1900-01-01', // format Y-m-d
       'country_iso_code' => 'nullable|string|max:2',
-      'plate_number' => 'sometimes|required|string|unique:cars|regex:/^[A-Z0-9]{1,10}$/i',
+      'plate_number' => 'sometimes|required|string|unique:cars|regex:/^[A-Z]{2}-[0-9]{3}-[A-Z]{2}$/i',
       'mileage' => 'sometimes|required|integer|min:0',
-      'last_maintenance_date' => 'sometimes|required|date|before_or_equal:today|after_or_equal:production_date',
+      'last_maintenance_date' => 'sometimes|required|date|before_or_equal:today|after_or_equal:production_date', // format Y-m-d
       'user_id' => 'sometimes|required|exists:users,id'
     ]);
 
