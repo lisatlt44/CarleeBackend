@@ -14,25 +14,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-  return $request->user();
-});
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//   return $request->user();
+// });
 
 
 // Structure d'authentification
-// Route::get('/users/{id}', 'UserController@show');
-Route::middleware('auth:sanctum')->get('/api/users/{id}', '\App\Http\Controllers\UserController@show');
-// Route::get('/cars/{id}', 'CarController@show');
-// Route::post('/documents', 'DocumentController@store');
-
-
-// Route::post('/register', 'UserController@register');
-// Route::post('/login', 'UserController@login');
+Route::post('/register', 'UserController@register');
+Route::post('/login', 'UserController@login');
 // Route::middleware('auth:api')->group(function () {
-//   // CRUD operations for users
-//   // Route::get('/users/{id}', 'UserController@show');
-//   Route::put('/users/{id}', 'UserController@update');
-//   Route::delete('/users/{id}', 'UserController@destroy');
+  // CRUD operations for users
+  Route::get('/users/{id}', 'UserController@show');
+  Route::put('/users/{id}', 'UserController@update');
+  Route::delete('/users/{id}', 'UserController@destroy');
 // });
 
 // Route::middleware('auth:api')->group(function () {
