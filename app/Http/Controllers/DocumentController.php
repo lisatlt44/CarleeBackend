@@ -69,26 +69,37 @@ class DocumentController extends Controller
   {
     // Récupérer le document en fonction de son ID
     $document = Document::findOrFail($id);
-
+  
     // Validation des données de la requête
-    $validatedData = $request->validate([
+    $request->validate([
       'name' => 'sometimes|required|string|max:255',
       'type' => 'sometimes|required|string|max:55',
       'file' => 'sometimes|required|file',
       'car_id' => 'sometimes|required|exists:cars,id',
     ]);
-
+  
     // Si un nouveau fichier est fourni, mettre à jour le fichier
     if ($request->file('file')) {
       $file = $request->file('file');
       $path = $file->store('documents');
-      $validatedData['file'] = $path;
-      $validatedData['file_size'] = $file->getSize();
+      $document->file = $path;
+      $document->file_size = $file->getSize();
     }
-
+  
     // Mise à jour des détails du document
-    $document->update($validatedData);
-
+    if ($request->has('name')) {
+      $document->name = $request->input('name');
+    }
+    if ($request->has('type')) {
+      $document->type = $request->input('type');
+    }
+    if ($request->has('car_id')) {
+      $document->car_id = $request->input('car_id');
+    }
+      
+    // Enregistrer les modifications
+    $document->save();
+  
     // Réponse avec le document mis à jour
     return response()->json(['message' => 'Les informations du document avec l\'id ' . $id . ' ont correctement été modifiées.', 'data' => $document]);
   }
