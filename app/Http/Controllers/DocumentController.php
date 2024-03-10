@@ -8,6 +8,21 @@ use App\Models\Document;
 class DocumentController extends Controller
 {
   /**
+   * Affiche les informations d'un document spécifique.
+   *
+   * @param int $id
+   * @return \Illuminate\Http\Response
+   */
+  public function show($id)
+  {
+    // Recherche du document par ID
+    $document = Document::findOrFail($id);
+
+    // Réponse avec les détails du document
+    return response()->json($document);
+  }
+
+  /**
    * Crée un nouveau document à partir des données fournies dans la requête.
    *
    * @param \Illuminate\Http\Request $request
@@ -18,7 +33,7 @@ class DocumentController extends Controller
     // Validation des données de la requête
     $request->validate([
       'name' => 'required|string|max:255',
-      'type' => 'required|string',
+      'type' => 'required|string|max:55',
       'file' => 'required|file|max:10240',
       'file_size' => 'nullable|integer',
       'car_id' => 'required|exists:cars,id',
@@ -40,22 +55,7 @@ class DocumentController extends Controller
     $document->save();
 
     // Réponse avec le document nouvellement créé
-    return response()->json($document, 201);
-  }
-
-  /**
-   * Affiche les détails d'un document spécifique.
-   *
-   * @param int $id
-   * @return \Illuminate\Http\Response
-   */
-  public function show($id)
-  {
-    // Recherche du document par ID
-    $document = Document::findOrFail($id);
-
-    // Réponse avec les détails du document
-    return response()->json($document);
+    return response()->json(['message' => 'Le document a correctement été créé.', 'data' => $document]);
   }
 
   /**
