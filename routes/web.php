@@ -16,6 +16,3 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::get('/user', '\App\Http\Controllers\Test@test');
-// Route::get('/api/users/{id}', '\App\Http\Controllers\UserController@show');
