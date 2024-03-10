@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 //   return $request->user();
 // });
 
+// Les routes définies ici sont préfixées par défaut par /api
 
 // Structure d'authentification
 Route::post('/register', '\App\Http\Controllers\UserController@register');

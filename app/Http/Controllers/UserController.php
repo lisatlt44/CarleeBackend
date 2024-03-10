@@ -37,13 +37,13 @@ class UserController extends Controller
 
     // Valider les données de la requête
     $validatedData = $request->validate([
-      'firstname' => 'required|string|max:255',
-      'lastname' => 'required|string|max:255',
-      'email' => 'required|string|email|max:255|unique:users,email',
+      'firstname' => 'sometimes|required|string|max:255',
+      'lastname' => 'sometimes|required|string|max:255',
+      'email' => 'sometimes|required|string|email|max:255|unique:users,email',
       'email_verified_at' => 'nullable|date',
       'birth_date' => 'nullable|date',
       'phone' => ['nullable', 'string', 'regex:/^0\d{9}$/'],
-      'password' => 'required|string|min:8',
+      'password' => 'sometimes|required|string|min:8',
       'remember_token' => 'nullable|string|max:255',
       'is_active' => 'nullable|boolean'
     ]);
