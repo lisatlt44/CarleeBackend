@@ -40,8 +40,8 @@ class UserController extends Controller
       'firstname' => 'sometimes|required|string|max:255',
       'lastname' => 'sometimes|required|string|max:255',
       'email' => 'sometimes|required|string|email|max:255|unique:users,email',
-      'email_verified_at' => ['nullable', 'date', 'regex:/^\d{4}-\d{2}-\d{2}$|^\d{2}\/\d{2}\/\d{4}$/', 'before_or_equal:today'], // format m/d/Y ou Y-m-d
-      'birth_date' => ['nullable', 'date', 'regex:/^\d{4}-\d{2}-\d{2}$|^\d{2}\/\d{2}\/\d{4}$/', 'before_or_equal:today'], // format m/d/Y ou Y-m-d
+      'email_verified_at' => ['nullable', 'date', 'before_or_equal:today', 'after_or_equal:2023-01-01'], // format m/d/Y ou Y-m-d
+      'birth_date' => ['nullable', 'date', 'regex:/^\d{4}-\d{2}-\d{2}$|^\d{2}\/\d{2}\/\d{4}$/', 'before_or_equal:today', 'after_or_equal:1900-01-01'], // format m/d/Y ou Y-m-d
       'phone' => ['nullable', 'string', 'regex:/^0\d{9}$/'],
       'password' => 'sometimes|required|string|min:8',
       'remember_token' => 'nullable|string|max:255',
