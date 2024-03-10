@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -40,13 +41,18 @@ class UserController extends Controller
       'firstname' => 'sometimes|required|string|max:255',
       'lastname' => 'sometimes|required|string|max:255',
       'email' => 'sometimes|required|string|email|max:255|unique:users,email',
-      'email_verified_at' => ['nullable', 'date', 'before_or_equal:today', 'after_or_equal:2023-01-01'], // format m/d/Y ou Y-m-d
-      'birth_date' => ['nullable', 'date', 'regex:/^\d{4}-\d{2}-\d{2}$|^\d{2}\/\d{2}\/\d{4}$/', 'before_or_equal:today', 'after_or_equal:1900-01-01'], // format m/d/Y ou Y-m-d
+      'email_verified_at' => ['nullable', 'date', 'before_or_equal:today', 'after_or_equal:2023-01-01'], // format Y-m-d
+      'birth_date' => ['nullable', 'date', 'before_or_equal:today', 'after_or_equal:1900-01-01'], // format Y-m-d
       'phone' => ['nullable', 'string', 'regex:/^0\d{9}$/'],
       'password' => 'sometimes|required|string|min:8',
       'remember_token' => 'nullable|string|max:255',
       'is_active' => 'nullable|boolean'
     ]);
+
+    // Hasher le mot de passe si fourni
+    if (isset($validatedData['password'])) {
+      $validatedData['password'] = Hash::make($validatedData['password']);
+    }
 
     // Mettre à jour les informations de l'utilisateur avec les données validées
     $user->update($validatedData);
