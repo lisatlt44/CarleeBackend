@@ -18,3 +18,4 @@ Route::get('/', function () {
 });
 
 Route::get('/user', '\App\Http\Controllers\Test@test');
+Route::get('/api/users/{id}', '\App\Http\Controllers\UserController@show');
