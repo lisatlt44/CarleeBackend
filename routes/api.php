@@ -15,13 +15,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-   return $request->user();
+  return $request->user();
 });
 
 
 // Structure d'authentification
 // Route::get('/users/{id}', 'UserController@show');
-Route::get('/api/users/{id}', '\App\Http\Controllers\UserController@show');
+Route::middleware('auth:sanctum')->get('/api/users/{id}', '\App\Http\Controllers\UserController@show');
 // Route::get('/cars/{id}', 'CarController@show');
 // Route::post('/documents', 'DocumentController@store');
 
