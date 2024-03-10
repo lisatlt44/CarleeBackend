@@ -40,7 +40,7 @@ class UserController extends Controller
       'firstname' => 'sometimes|required|string|max:255',
       'lastname' => 'sometimes|required|string|max:255',
       'email' => 'sometimes|required|string|email|max:255|unique:users,email',
-      'email_verified_at' => 'nullable|date',
+      'email_verified_at' => ['nullable', 'date', 'regex:/^\d{4}-\d{2}-\d{2}$|^\d{2}\/\d{2}\/\d{4}$/'],
       'birth_date' => 'nullable|date',
       'phone' => ['nullable', 'string', 'regex:/^0\d{9}$/'],
       'password' => 'sometimes|required|string|min:8',
