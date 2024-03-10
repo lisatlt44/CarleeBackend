@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
   /**
-   * Affiche les détails d'un utilisateur spécifique en fonction de son ID.
+   * Affiche les informations d'un utilisateur spécifique.
    *
    * @param int $id
    * @return \Illuminate\Http\JsonResponse
@@ -25,7 +25,7 @@ class UserController extends Controller
   }
 
   /**
-   * Met à jour les informations d'un utilisateur existant en fonction de son ID.
+   * Met à jour les informations d'un utilisateur spécifique.
    *
    * @param \Illuminate\Http\Request $request
    * @param int $id
@@ -61,7 +61,7 @@ class UserController extends Controller
   }
 
   /**
-   * Met à jour le statut is_active de l'utilisateur spécifié pour le désactiver.
+   * Supprime un utilisateur spécifique.
    *
    * @param int $id
    * @return \Illuminate\Http\JsonResponse

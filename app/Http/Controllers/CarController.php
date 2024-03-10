@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 class CarController extends Controller
 {
   /**
-   * Affiche les détails d'une voiture spécifique.
+   * Affiche les informations d'une voiture spécifique.
    *
    * @param int $id
    * @return \Illuminate\Http\Response
@@ -67,7 +67,7 @@ class CarController extends Controller
   }
 
   /**
-   * Met à jour les détails d'une voiture spécifique.
+   * Met à jour les informations d'une voiture spécifique.
    *
    * @param \Illuminate\Http\Request $request
    * @param int $id
