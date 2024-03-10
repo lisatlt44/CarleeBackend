@@ -34,7 +34,7 @@ class DocumentController extends Controller
     $request->validate([
       'name' => 'required|string|max:255',
       'type' => 'required|string|max:55',
-      'file' => 'required|file|max:10240',
+      'file' => 'required|file',
       'car_id' => 'required|exists:cars,id',
     ]);
 
@@ -49,7 +49,7 @@ class DocumentController extends Controller
     $document->name = $request->input('name');
     $document->type = $request->input('type');
     $document->file = $path;
-    $document->file_size = $file->getSize();
+    $document->file_size = $file->getSize(); // en octets
     $document->is_active = true;
     $document->car_id = $request->input('car_id');
     $document->save();
@@ -59,7 +59,7 @@ class DocumentController extends Controller
   }
 
   /**
-   * Met à jour les détails d'un document spécifique.
+   * Met à jour les informations d'un document spécifique.
    *
    * @param \Illuminate\Http\Request $request
    * @param int $id
@@ -67,17 +67,16 @@ class DocumentController extends Controller
    */
   public function update(Request $request, $id)
   {
+    // Récupérer le document en fonction de son ID
+    $document = Document::findOrFail($id);
+
     // Validation des données de la requête
     $request->validate([
-      'name' => 'required|string|max:255',
-      'type' => 'required|string',
-      'file' => 'nullable|file|max:10240',
-      'file_size' => 'nullable|integer',
-      'car_id' => 'required|exists:cars,id',
+      'name' => 'sometimes|required|string|max:255',
+      'type' => 'sometimes|required|string',
+      'file' => 'sometimes|required|file',
+      'car_id' => 'sometimes|required|exists:cars,id',
     ]);
-
-    // Recherche du document par ID
-    $document = Document::findOrFail($id);
 
     // Mise à jour des détails du document
     $document->name = $request->input('name');
@@ -95,7 +94,7 @@ class DocumentController extends Controller
     $document->save();
 
     // Réponse avec le document mis à jour
-    return response()->json($document);
+    return response()->json(['message' => 'Les informations du document avec l\'id ' . $id . ' ont correctement été modifiées.', 'data' => $document]);
   }
 
   /**
