@@ -79,7 +79,7 @@ class DocumentController extends Controller
     ]);
 
     // Si un nouveau fichier est fourni, mettre à jour le fichier
-    if ($request->hasFile('file')) {
+    if ($request->file('file')) {
       $file = $request->file('file');
       $path = $file->store('documents');
       $validatedData['file'] = $path;
@@ -108,6 +108,6 @@ class DocumentController extends Controller
     $document->update(['is_active' => false]);
 
     // Réponse confirmant la désactivation du document
-    return response()->json(['message' => 'Le document a correctement été désactivé'], 200);
+    return response()->json(['message' => 'Le document a correctement été désactivé.'], 200);
   }
 }

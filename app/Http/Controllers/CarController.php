@@ -115,6 +115,6 @@ class CarController extends Controller
     $car->update(['is_active' => false]);
 
     // Réponse confirmant la désactivation de la voiture
-    return response()->json(['message' => 'La voiture a correctement été désactivée'], 200);
+    return response()->json(['message' => 'La voiture a correctement été désactivée.'], 200);
   }
 }
