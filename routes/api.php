@@ -32,16 +32,16 @@ Route::post('/login', '\App\Http\Controllers\UserController@login');
 
 // Route::middleware('auth:api')->group(function () {
   // CRUD operations for cars
-  Route::post('/cars', '\App\Http\Controllers\CarController@store');
   Route::get('/cars/{id}', '\App\Http\Controllers\CarController@show');
+  Route::post('/cars', '\App\Http\Controllers\CarController@store');
   Route::put('/cars/{id}', '\App\Http\Controllers\CarController@update');
   Route::delete('/cars/{id}', '\App\Http\Controllers\CarController@destroy');
 // });
 
 // Route::middleware('auth:api')->group(function () {
     // CRUD operations for documents
-  Route::post('/documents', '\App\Http\Controllers\DocumentController@store');
   Route::get('/documents/{id}', '\App\Http\Controllers\DocumentController@show');
+  Route::post('/documents', '\App\Http\Controllers\DocumentController@store');
   Route::put('/documents/{id}', '\App\Http\Controllers\DocumentController@update');
   Route::delete('/documents/{id}', '\App\Http\Controllers\DocumentController@destroy');
 // });

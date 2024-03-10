@@ -47,16 +47,6 @@ class Car extends Model
   ];
 
   /**
-   * The attributes that should be cast to native types.
-   *
-   *  @var array
-   */
-  protected $casts = [
-    'production_date' => 'datetime',
-    'last_maintenance_date' => 'datetime'
-  ];
-
-  /**
    * Define the relationship with cars.
    */
   public function user()

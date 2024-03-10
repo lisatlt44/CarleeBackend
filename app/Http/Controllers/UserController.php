@@ -58,7 +58,7 @@ class UserController extends Controller
     $user->update($validatedData);
 
     // Retourner les détails de l'utilisateur mis à jour sous forme de réponse JSON
-    return response()->json(['message' => 'Les informations de l\'utilisateur avec l\'id ' . $id . ' ont correctement été modifiées.', 'user' => $user]);
+    return response()->json(['message' => 'Les informations de l\'utilisateur avec l\'id ' . $id . ' ont correctement été modifiées.', 'data' => $user]);
   }
 
   /**
