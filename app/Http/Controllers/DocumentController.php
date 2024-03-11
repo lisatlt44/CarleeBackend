@@ -42,8 +42,11 @@ class DocumentController extends Controller
     // Récupération du fichier depuis la requête
     $file = $request->file('file');
 
-    // Stockage du fichier dans le répertoire spécifique
-    $path = $file->store('documents');
+    $path = $file->move(public_path('documents'), $file->getClientOriginalName());
+
+
+    // // Stockage du fichier dans le répertoire spécifique
+    // $path = $file->store('documents');
 
     $url = Storage::url($path);
 
@@ -51,7 +54,7 @@ class DocumentController extends Controller
     $document = new Document();
     $document->name = $request->input('name');
     $document->type = $request->input('type');
-    $document->file = $url;
+    $document->file = 'documents/' . $file->getClientOriginalName(); // Chemin relatif par rapport au répertoire public
     $document->file_size = $file->getSize(); // en octets
     $document->is_active = true;
     $document->car_id = $request->input('car_id');
