@@ -44,11 +44,13 @@ class DocumentController extends Controller
     // Stockage du fichier dans le répertoire spécifique
     $path = $file->store('documents');
 
+    $url = Storage::url($path);
+
     // Création d'un nouveau document
     $document = new Document();
     $document->name = $request->input('name');
     $document->type = $request->input('type');
-    $document->file = $path;
+    $document->file = $url;
     $document->file_size = $file->getSize(); // en octets
     $document->is_active = true;
     $document->car_id = $request->input('car_id');
@@ -69,37 +71,26 @@ class DocumentController extends Controller
   {
     // Récupérer le document en fonction de son ID
     $document = Document::findOrFail($id);
-  
+
     // Validation des données de la requête
-    $request->validate([
+    $validatedData = $request->validate([
       'name' => 'sometimes|required|string|max:255',
       'type' => 'sometimes|required|string|max:55',
       'file' => 'sometimes|required|file',
       'car_id' => 'sometimes|required|exists:cars,id',
     ]);
-  
+
     // Si un nouveau fichier est fourni, mettre à jour le fichier
     if ($request->file('file')) {
       $file = $request->file('file');
       $path = $file->store('documents');
-      $document->file = $path;
-      $document->file_size = $file->getSize();
+      $validatedData['file'] = $path;
+      $validatedData['file_size'] = $file->getSize();
     }
-  
+
     // Mise à jour des détails du document
-    if ($request->has('name')) {
-      $document->name = $request->input('name');
-    }
-    if ($request->has('type')) {
-      $document->type = $request->input('type');
-    }
-    if ($request->has('car_id')) {
-      $document->car_id = $request->input('car_id');
-    }
-      
-    // Enregistrer les modifications
-    $document->save();
-  
+    $document->update($validatedData);
+
     // Réponse avec le document mis à jour
     return response()->json(['message' => 'Les informations du document avec l\'id ' . $id . ' ont correctement été modifiées.', 'data' => $document]);
   }
