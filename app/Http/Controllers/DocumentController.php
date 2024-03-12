@@ -84,7 +84,7 @@ class DocumentController extends Controller
     // Si un nouveau fichier est fourni, mettre à jour le fichier
     if ($request->file('file')) {
       $file = $request->file('file');
-      $path = $file->store('documents');
+      $path = $file->store('public/documents');
       $validatedData['file'] = $path;
       $validatedData['file_size'] = $file->getSize();
     }
