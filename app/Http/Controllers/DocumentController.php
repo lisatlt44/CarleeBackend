@@ -83,14 +83,17 @@ class DocumentController extends Controller
 
     // Si un nouveau fichier est fourni, mettre à jour le fichier
     if ($request->file('file')) {
+      Storage::delete($document->file);
+
       $file = $request->file('file');
       $path = $file->store('public/documents');
-      $validatedData['file'] = $path;
-      $validatedData['file_size'] = $file->getSize();
+
+      $document->file = $path;
+      $document->file_size = $file->getSize();
     }
 
     // Mise à jour des détails du document
-    $document->update($validatedData);
+    $document->fill($validatedData)->save();
 
     // Réponse avec le document mis à jour
     return response()->json(['message' => 'Les informations du document avec l\'id ' . $id . ' ont correctement été modifiées.', 'data' => $document]);
