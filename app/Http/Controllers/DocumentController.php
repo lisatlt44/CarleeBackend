@@ -43,7 +43,7 @@ class DocumentController extends Controller
     $file = $request->file('file');
 
     // Stockage du fichier dans le répertoire spécifique
-    $path = $file->store('documents');
+    $path = $file->store('public/documents');
 
     $url = Storage::url($path);
 
