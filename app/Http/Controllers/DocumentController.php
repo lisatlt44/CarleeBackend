@@ -83,7 +83,8 @@ class DocumentController extends Controller
 
     // Si un nouveau fichier est fourni, mettre à jour le fichier
     if ($request->file('file')) {
-      Storage::delete($document->file);
+      dump('test');
+      // Storage::delete($document->file);
 
       // $file = $request->file('file');
       // $path = $file->store('public/documents');
