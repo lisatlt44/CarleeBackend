@@ -45,3 +45,8 @@ Route::post('/login', '\App\Http\Controllers\UserController@login');
   Route::put('/documents/{id}', '\App\Http\Controllers\DocumentController@update');
   Route::delete('/documents/{id}', '\App\Http\Controllers\DocumentController@destroy');
 // });
+
+// Route::middleware('auth:api')->group(function () {
+    // CRUD operations for car_pictures
+    Route::post('/car-pictures', '\App\Http\Controllers\CarPictureController@store');
+  // });

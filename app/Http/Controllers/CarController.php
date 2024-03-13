@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Car;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\CarPictureController;
 
 class CarController extends Controller
 {
@@ -61,6 +62,10 @@ class CarController extends Controller
     $car->is_active = true;
     $car->user_id = $request->input('user_id');
     $car->save();
+
+    // Appel du contrôleur CarPictureController pour ajouter les images
+    $carPictureController = new CarPictureController();
+    $response = $carPictureController->store($request, $car->id);
 
     // Réponse avec la voiture nouvellement créée
     return response()->json(['message' => 'La voiture a correctement été créée.', 'data' => $car]);

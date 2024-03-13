@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Car extends Model
+class CarPicture extends Model
 {
   use HasFactory;
 
@@ -14,7 +14,7 @@ class Car extends Model
    *
    * @var string
    */
-  protected $table = 'cars';
+  protected $table = 'car_pictures';
   protected $connection = 'mysql';
   const CREATED_AT = 'created_at';
   const UPDATED_AT = 'updated_at';
@@ -26,36 +26,19 @@ class Car extends Model
    */
   protected $primaryKey = 'id';
 
-  /**
+    /**
    * The attributes that are mass assignable.
    *
    * @var array
    */
   protected $fillable = [
-    'name',
-    'brand',
-    'model',
-    'color',
-    'fuel_type',
-    'production_date',
-    'country_iso_code',
-    'plate_number',
-    'mileage',
-    'last_maintenance_date',
-    'is_active',
-    'user_id'
+    'picture',
+    'picture_size',
+    'car_id'
   ];
 
-  /**
-   * Define the relationship with cars.
-   */
-  public function user()
+  public function car()
   {
-    return $this->belongsTo(User::class);
-  }
-
-  public function carPictures()
-  {
-    return $this->hasMany(CarPicture::class);
+    return $this->belongsTo(Car::class);
   }
 }
