@@ -63,10 +63,29 @@ class CarPictureController extends Controller
       $carPicture = new CarPicture(); 
       $carPicture->picture = $url;
       $carPicture->picture_size = $picture->getSize(); // en octets
+      $carPicture->is_active = true;
       $car->carPictures()->save($carPicture);
     }
 
     // Réponse avec un message de succès
     return response()->json(['message' => 'Les images de la voiture ont correctement été créés.', 'data' => $imageUrls]);
+  }
+
+  /**
+   * Supprime une image de voiture spécifique.
+   *
+   * @param int $id
+   * @return \Illuminate\Http\JsonResponse
+   */
+  public function destroy($id)
+  {
+    // Recherche du document à désactiver
+    $carPicture = CarPicture::findOrFail($id);
+
+    // Mise à jour du statut is_active
+    $carPicture->update(['is_active' => false]);
+
+    // Réponse confirmant la désactivation du document
+    return response()->json(['message' => 'L\'image a correctement été désactivé.'], 200);
   }
 }

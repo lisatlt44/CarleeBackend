@@ -34,6 +34,7 @@ class CarPicture extends Model
   protected $fillable = [
     'picture',
     'picture_size',
+    'is_active',
     'car_id'
   ];
 
