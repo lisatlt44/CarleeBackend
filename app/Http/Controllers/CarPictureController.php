@@ -17,13 +17,16 @@ class CarPictureController extends Controller
    */
   public function store(Request $request)
   {
-    return response()->json(['message' => 'Les images de la voiture ont correctement été créés.']);
+    // return response()->json(['message' => 'Les images de la voiture ont correctement été créés.']);
     // Validation des données de la requête
-    // $request->validate([
-    //   'car_id' => 'required|exists:cars,id',
-    //   'picture' => 'required|array',
-    //   'picture.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048', 
-    // ]);
+    $request->validate([
+      'car_id' => 'required|exists:cars,id',
+      'picture' => 'required|array',
+      'picture.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048', 
+    ]);
+
+    return response()->json(['message' => 'Les images de la voiture ont correctement été créés.']);
+
 
     // // Récupérer la voiture à laquelle ajouter les images
     // $car = Car::findOrFail($request->input('car_id'));
