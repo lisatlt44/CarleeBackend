@@ -26,7 +26,9 @@ class CarPictureController extends Controller
 
     // Récupérer la voiture à laquelle ajouter les images
     $car = Car::findOrFail($request->input('car_id'));
-
+    dump($car);
+    exit;
+    
     // Tableau pour stocker les URLs des images ajoutées
     $imageUrls = [];
 
