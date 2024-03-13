@@ -38,7 +38,7 @@ class CarPictureController extends Controller
       $imageUrls[] = $url;
       $carPicture = new CarPicture(); 
       $carPicture->picture = $url;
-      $carPicture->file_size = $picture->getSize(); // en octets
+      $carPicture->picture_size = $picture->getSize(); // en octets
       $car->carPictures()->save($carPicture);
     }
 
