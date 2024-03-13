@@ -17,36 +17,37 @@ class CarPictureController extends Controller
    */
   public function store(Request $request)
   {
+    return response()->json(['message' => 'Les images de la voiture ont correctement été créés.']);
     // Validation des données de la requête
-    $request->validate([
-      'car_id' => 'required|exists:cars,id',
-      'picture' => 'required|array',
-      'picture.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048', 
-    ]);
+    // $request->validate([
+    //   'car_id' => 'required|exists:cars,id',
+    //   'picture' => 'required|array',
+    //   'picture.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048', 
+    // ]);
 
-    // Récupérer la voiture à laquelle ajouter les images
-    $car = Car::findOrFail($request->input('car_id'));
-    dd($car);
+    // // Récupérer la voiture à laquelle ajouter les images
+    // $car = Car::findOrFail($request->input('car_id'));
+    // dd($car);
 
-    // Tableau pour stocker les URLs des images ajoutées
-    $imageUrls = [];
+    // // Tableau pour stocker les URLs des images ajoutées
+    // $imageUrls = [];
 
-    // Traiter et enregistrer les images téléchargées
-    foreach ($request->file('picture') as $picture) {
-      $path = $picture->store('public/carPictures');
-      dd($path);
+    // // Traiter et enregistrer les images téléchargées
+    // foreach ($request->file('picture') as $picture) {
+    //   $path = $picture->store('public/carPictures');
+    //   dd($path);
 
-      $url = Storage::url($path);
-      $imageUrls[] = $url;
-      $carPicture = new CarPicture(); 
-      $carPicture->picture = $url;
-      $carPicture->file_size = $picture->getSize(); // en octets
-      dd($carPicture);
+    //   $url = Storage::url($path);
+    //   $imageUrls[] = $url;
+    //   $carPicture = new CarPicture(); 
+    //   $carPicture->picture = $url;
+    //   $carPicture->file_size = $picture->getSize(); // en octets
+    //   dd($carPicture);
 
-      $car->carPictures()->save($carPicture);
-    }
+    //   $car->carPictures()->save($carPicture);
+    // }
 
-    // Réponse avec un message de succès
-    return response()->json(['message' => 'Les images de la voiture ont correctement été créés.', 'data' => $imageUrls]);
+    // // Réponse avec un message de succès
+    // return response()->json(['message' => 'Les images de la voiture ont correctement été créés.', 'data' => $imageUrls]);
   }
 }
