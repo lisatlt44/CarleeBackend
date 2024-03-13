@@ -26,20 +26,23 @@ class CarPictureController extends Controller
 
     // Récupérer la voiture à laquelle ajouter les images
     $car = Car::findOrFail($request->input('car_id'));
-    dump($car);
-    exit;
-    
+    dd($car);
+
     // Tableau pour stocker les URLs des images ajoutées
     $imageUrls = [];
 
     // Traiter et enregistrer les images téléchargées
     foreach ($request->file('picture') as $picture) {
       $path = $picture->store('public/carPictures');
+      dd($path);
+
       $url = Storage::url($path);
       $imageUrls[] = $url;
       $carPicture = new CarPicture(); 
       $carPicture->picture = $url;
       $carPicture->file_size = $picture->getSize(); // en octets
+      dd($carPicture);
+
       $car->carPictures()->save($carPicture);
     }
 
