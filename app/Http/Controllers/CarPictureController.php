@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Car;
+use Illuminate\Support\Facades\Storage;
 use App\Models\CarPicture;
 
 class CarPictureController extends Controller
