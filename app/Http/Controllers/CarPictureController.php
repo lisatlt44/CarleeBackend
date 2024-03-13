@@ -22,7 +22,7 @@ class CarPictureController extends Controller
     $request->validate([
       'car_id' => 'required|exists:cars,id',
       'picture' => 'required|array',
-      'picture.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048', 
+      'picture.*' => 'image|mimes:jpeg,png,jpg', 
     ]);
 
     // Récupérer la voiture à laquelle ajouter les images
