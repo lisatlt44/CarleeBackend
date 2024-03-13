@@ -19,19 +19,19 @@ class CarPictureController extends Controller
   public function index($carId)
   {
     $carPictures = CarPicture::where('car_id', $carId)->get();
-    return response()->json(['data' => $carPictures]);
+    return response()->json([$carPictures]);
   }
 
   /**
    * Récupère une image de voiture spécifique en fonction de son identifiant.
    *
-   * @param  int  $id
+   * @param int $id
    * @return \Illuminate\Http\Response
    */
   public function show($id)
   {
     $carPicture = CarPicture::findOrFail($id);
-    return response()->json(['data' => $carPicture]);
+    return response()->json([$carPicture]);
   }
 
   /**
