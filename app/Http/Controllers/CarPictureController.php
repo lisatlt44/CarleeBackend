@@ -30,9 +30,8 @@ class CarPictureController extends Controller
    */
   public function show($id)
   {
-    dd($id);
-    // $carPicture = CarPicture::findOrFail($id);
-    // return response()->json($carPicture);
+    $carPicture = CarPicture::findOrFail($id);
+    return response()->json($carPicture);
   }
 
   /**

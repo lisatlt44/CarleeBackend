@@ -48,7 +48,7 @@ Route::post('/login', '\App\Http\Controllers\UserController@login');
 
 // Route::middleware('auth:api')->group(function () {
     // CRUD operations for car_pictures
-    Route::get('/car-pictures/{carId}', '\App\Http\Controllers\CarPictureController@index');
+    Route::get('/car-pictures/car/{carId}', '\App\Http\Controllers\CarPictureController@index');
     Route::get('/car-pictures/{id}', '\App\Http\Controllers\CarPictureController@show');
     Route::post('/car-pictures', '\App\Http\Controllers\CarPictureController@store');    
   // });
