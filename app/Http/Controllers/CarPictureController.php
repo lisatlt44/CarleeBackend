@@ -19,7 +19,7 @@ class CarPictureController extends Controller
   public function index($carId)
   {
     $carPictures = CarPicture::where('car_id', $carId)->get();
-    return response()->json([$carPictures]);
+    return response()->json($carPictures);
   }
 
   /**
@@ -31,7 +31,7 @@ class CarPictureController extends Controller
   public function show($id)
   {
     $carPicture = CarPicture::findOrFail($id);
-    return response()->json([$carPicture]);
+    return response()->json($carPicture);
   }
 
   /**
