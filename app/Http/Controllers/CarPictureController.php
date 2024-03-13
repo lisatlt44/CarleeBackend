@@ -11,21 +11,27 @@ use App\Models\CarPicture;
 class CarPictureController extends Controller
 {
   /**
-   * Récupère la liste des images de voiture pour une voiture donnée.
+   * Récupère toutes les images associées à une voiture spécifique.
    *
-   * @param int $carId L'identifiant de la voiture
+   * @param int $carId
    * @return \Illuminate\Http\Response
    */
   public function index($carId)
   {
-    // Récupérer la voiture
-    $car = Car::findOrFail($carId);
-
-    // Récupérer les images de la voiture
-    $carPictures = $car->carPictures;
-
-    // Réponse avec les images de la voiture
+    $carPictures = CarPicture::where('car_id', $carId)->get();
     return response()->json(['data' => $carPictures]);
+  }
+
+  /**
+   * Récupère une image de voiture spécifique en fonction de son identifiant.
+   *
+   * @param  int  $id
+   * @return \Illuminate\Http\Response
+   */
+  public function show($id)
+  {
+    $carPicture = CarPicture::findOrFail($id);
+    return response()->json(['data' => $carPicture]);
   }
 
   /**
