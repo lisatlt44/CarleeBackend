@@ -77,24 +77,11 @@ class DocumentController extends Controller
     $validatedData = $request->validate([
       'name' => 'sometimes|required|string|max:255',
       'type' => 'sometimes|required|string|max:55',
-      'file' => 'sometimes|required|file',
       'car_id' => 'sometimes|required|exists:cars,id',
     ]);
 
-    // Si un nouveau fichier est fourni, mettre à jour le fichier
-    if ($request->file('file')) {
-      dump('test');
-      // Storage::delete($document->file);
-
-      // $file = $request->file('file');
-      // $path = $file->store('public/documents');
-
-      // $document->file = $path;
-      // $document->file_size = $file->getSize();
-    }
-
     // Mise à jour des détails du document
-    // $document->fill($validatedData)->save();
+    $document->update($validatedData);
 
     // Réponse avec le document mis à jour
     return response()->json(['message' => 'Les informations du document avec l\'id ' . $id . ' ont correctement été modifiées.', 'data' => $document]);

@@ -86,6 +86,6 @@ class CarPictureController extends Controller
     $carPicture->update(['is_active' => false]);
 
     // Réponse confirmant la désactivation du document
-    return response()->json(['message' => 'L\'image a correctement été désactivé.'], 200);
+    return response()->json(['message' => 'L\'image a correctement été désactivée.'], 200);
   }
 }
