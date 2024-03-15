@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Car;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\CarPictureController;
+use Illuminate\Support\Str;
 
 class CarController extends Controller
 {
@@ -49,7 +50,7 @@ class CarController extends Controller
 
     // Création d'une nouvelle voiture
     $car = new Car();
-    $car->name = $request->input('name');
+    $car->name = Str::ucfirst($request->input('name'));
     $car->brand = $request->input('brand');
     $car->model = $request->input('model');
     $car->color = $request->input('color');
