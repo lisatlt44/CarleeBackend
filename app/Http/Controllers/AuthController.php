@@ -84,7 +84,7 @@ class AuthController extends Controller
    */
   public function logout() {
     auth()->logout();
-    return response()->json(['message' => 'L\'utilisateur a correctement été déconnecté.']);
+    return response()->json(['message' => 'L\'utilisateur a correctement été déconnecté.'], 200, ['Accept' => 'application/json']);
   }
 
   /**
