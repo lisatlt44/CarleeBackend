@@ -83,8 +83,9 @@ class AuthController extends Controller
    * @return \Illuminate\Http\JsonResponse
    */
   public function logout() {
+    // accept application/json coté front
     auth()->logout();
-    return response()->json(['message' => 'L\'utilisateur a correctement été déconnecté.'], 200, ['Accept' => 'application/json']);
+    return response()->json(['message' => 'L\'utilisateur a correctement été déconnecté.']);
   }
 
   /**
@@ -103,6 +104,34 @@ class AuthController extends Controller
    */
   public function userProfile() {
     return response()->json(auth()->user());
+  }
+
+  /**
+   * Changement du mot de passe de l'utilisateur.
+   *
+   * @return \Illuminate\Http\JsonResponse
+   */
+  public function changePassword(Request $request) {
+    $validator = Validator::make($request->all(), [
+      'current_password' => 'required|string|min:8',
+      'new_password' => 'required|string|min:8',
+      'confirm_password' => 'required|string|min:8|same:new_password',
+    ]);
+
+    if($validator->fails()){
+      return response()->json($validator->errors()->toJson(), 400);
+    }
+
+    $user = auth()->user();
+
+    if (!Hash::check($request->current_password, $user->password)) {
+      return response()->json(['error' => 'Le mot de passe saisi ne correspond pas au mot de passe actuel.'], 401);
+    }
+
+    $user->password = Hash::make($request->new_password);
+    $user->save();
+
+    return response()->json(['message' => 'Le mot de passe a correctement été changé']);
   }
 
   /**
