@@ -21,14 +21,23 @@ use Illuminate\Support\Facades\Route;
 // Les routes définies ici sont préfixées par défaut par /api
 
 // Structure d'authentification
-Route::post('/register', '\App\Http\Controllers\UserController@register');
-Route::post('/login', '\App\Http\Controllers\UserController@login');
-// Route::middleware('auth:api')->group(function () {
+Route::group([
+  'middleware' => 'api',
+  'prefix' => 'auth'
+], function ($router) {
+  Route::post('/login', '\App\Http\Controllers\AuthController@login');
+  Route::post('/register', '\App\Http\Controllers\AuthController@register');
+  Route::post('/logout', '\App\Http\Controllers\AuthController@logout');
+  Route::post('/refresh', '\App\Http\Controllers\AuthController@refresh');
+  Route::get('/user-profile', '\App\Http\Controllers\AuthController@userProfile');
+});
+
+Route::middleware('auth:api')->group(function () {
   // CRUD operations for users
   Route::get('/users/{id}', '\App\Http\Controllers\UserController@show');
   Route::put('/users/{id}', '\App\Http\Controllers\UserController@update');
   Route::delete('/users/{id}', '\App\Http\Controllers\UserController@destroy');
-// });
+});
 
 // Route::middleware('auth:api')->group(function () {
   // CRUD operations for cars

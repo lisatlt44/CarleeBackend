@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Document;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class DocumentController extends Controller
 {
@@ -49,7 +50,7 @@ class DocumentController extends Controller
 
     // Création d'un nouveau document
     $document = new Document();
-    $document->name = $request->input('name');
+    $document->name = Str::ucfirst($request->input('name'));
     $document->type = $request->input('type');
     $document->file = $url;
     $document->file_size = $file->getSize(); // en octets
