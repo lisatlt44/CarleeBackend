@@ -10,6 +10,17 @@ use Illuminate\Support\Str;
 class DocumentController extends Controller
 {
   /**
+   * Création d'une instance.
+   * Spécification des méthodes soumises à la vérification d'authentification 
+   *
+   * @return void
+   */
+  public function __construct() 
+  {
+    $this->middleware('auth:api');
+  }
+
+  /**
    * Affiche les informations d'un document spécifique.
    *
    * @param int $id

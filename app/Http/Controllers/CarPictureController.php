@@ -11,6 +11,17 @@ use App\Models\CarPicture;
 class CarPictureController extends Controller
 {
   /**
+   * Création d'une instance.
+   * Spécification des méthodes soumises à la vérification d'authentification 
+   *
+   * @return void
+   */
+  public function __construct() 
+  {
+    $this->middleware('auth:api');
+  }
+
+  /**
    * Récupère toutes les images associées à une voiture spécifique.
    *
    * @param int $carId

@@ -11,6 +11,17 @@ use Illuminate\Support\Str;
 class CarController extends Controller
 {
   /**
+   * Création d'une instance.
+   * Spécification des méthodes soumises à la vérification d'authentification 
+   *
+   * @return void
+   */
+  public function __construct() 
+  {
+    $this->middleware('auth:api');
+  }
+
+  /**
    * Affiche les informations d'une voiture spécifique.
    *
    * @param int $id
