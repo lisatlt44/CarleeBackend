@@ -45,7 +45,7 @@ class CarController extends Controller
   public function store(Request $request)
   {
     // Validation des données de la requête
-    $request->validate([
+    $validator = Validator::make($request->all(), [
       'name' => 'required|string|max:55',
       'brand' => 'required|string|max:55',
       'model' => 'required|string|max:55',
@@ -58,6 +58,11 @@ class CarController extends Controller
       'last_maintenance_date' => 'required|date|before_or_equal:today|after_or_equal:production_date', // format Y-m-d
       'user_id' => 'required|exists:users,id'
     ]);
+
+    // Vérification de la validation
+    if ($validator->fails()) {
+      return response()->json($validator->errors(), 400);
+    }
 
     // Création d'une nouvelle voiture
     $car = new Car();
@@ -96,7 +101,7 @@ class CarController extends Controller
     $car = Car::findOrFail($id);
 
     // Validation des données de la requête
-    $validatedData = $request->validate([
+    $validator = Validator::make($request->all(), [
       'name' => 'sometimes|required|string|max:55',
       'brand' => 'sometimes|required|string|max:55',
       'model' => 'sometimes|required|string|max:55',
@@ -109,6 +114,14 @@ class CarController extends Controller
       'last_maintenance_date' => 'sometimes|required|date|before_or_equal:today|after_or_equal:production_date', // format Y-m-d
       'user_id' => 'sometimes|required|exists:users,id'
     ]);
+
+    // Vérification de la validation
+    if ($validator->fails()) {
+      return response()->json($validator->errors(), 400);
+    }
+    
+    // Obtenir les données validées
+    $validatedData = $validator->validated();
 
     // Mise à jour des détails de la voiture
     $car->update($validatedData);

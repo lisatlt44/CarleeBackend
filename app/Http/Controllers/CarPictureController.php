@@ -54,11 +54,16 @@ class CarPictureController extends Controller
   public function store(Request $request)
   {
     // Validation des données de la requête
-    $request->validate([
+    $validator = Validator::make($request->all(), [
       'car_id' => 'required|exists:cars,id',
       'picture' => 'required|array',
       'picture.*' => 'image|mimes:jpeg,png,jpg', 
     ]);
+
+    // Vérification de la validation
+    if ($validator->fails()) {
+      return response()->json($validator->errors(), 400);
+    }
 
     // Récupérer la voiture à laquelle ajouter les images
     $car = Car::findOrFail($request->input('car_id'));

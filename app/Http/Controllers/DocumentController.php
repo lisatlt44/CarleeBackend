@@ -44,12 +44,17 @@ class DocumentController extends Controller
   public function store(Request $request)
   {
     // Validation des données de la requête
-    $request->validate([
+    $validator = Validator::make($request->all(), [
       'name' => 'required|string|max:255',
       'type' => 'required|string|max:55',
       'file' => 'required|file',
       'car_id' => 'required|exists:cars,id',
     ]);
+
+    // Vérification de la validation
+    if ($validator->fails()) {
+      return response()->json($validator->errors(), 400);
+    } 
 
     // Récupération du fichier depuis la requête
     $file = $request->file('file');
@@ -86,11 +91,19 @@ class DocumentController extends Controller
     $document = Document::findOrFail($id);
 
     // Validation des données de la requête
-    $validatedData = $request->validate([
+    $validator = Validator::make($request->all(), [
       'name' => 'sometimes|required|string|max:255',
       'type' => 'sometimes|required|string|max:55',
       'car_id' => 'sometimes|required|exists:cars,id',
     ]);
+
+    // Vérification de la validation
+    if ($validator->fails()) {
+      return response()->json($validator->errors(), 400);
+    }
+
+    // Obtenir les données validées
+    $validatedData = $validator->validated();
 
     // Mise à jour des détails du document
     $document->update($validatedData);

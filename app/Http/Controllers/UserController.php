@@ -48,7 +48,7 @@ class UserController extends Controller
     $user = User::findOrFail($id);
 
     // Valider les données de la requête
-    $validatedData = $request->validate([
+    $validator = Validator::make($request->all(), [
       'firstname' => 'sometimes|required|string|max:255',
       'lastname' => 'sometimes|required|string|max:255',
       'email' => 'sometimes|required|string|email|max:255|unique:users,email',
@@ -58,6 +58,14 @@ class UserController extends Controller
       'password' => 'sometimes|required|string|min:8',
       'remember_token' => 'nullable|string|max:255',
     ]);
+
+    // Vérification de la validation
+    if ($validator->fails()) {
+      return response()->json($validator->errors(), 400);
+    }
+
+    // Obtenir les données validées
+    $validatedData = $validator->validated();
 
     // Hasher le mot de passe si fourni
     if (isset($validatedData['password'])) {
