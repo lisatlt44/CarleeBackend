@@ -17,13 +17,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Structure d'authentification
-Route::post('/login', '\App\Http\Controllers\AuthController@login');
-Route::post('/register', '\App\Http\Controllers\AuthController@register');
 Route::group([
   'middleware' => 'api',
   'prefix' => 'auth'
 ], function ($router) {
   // Les routes définies ci-dessous sont préfixées par /auth donc /auth/api
+  Route::post('/login', '\App\Http\Controllers\AuthController@login');
+  Route::post('/register', '\App\Http\Controllers\AuthController@register');
   Route::post('/logout', '\App\Http\Controllers\AuthController@logout');
   Route::post('/refresh', '\App\Http\Controllers\AuthController@refresh');
   Route::get('/user-profile', '\App\Http\Controllers\AuthController@userProfile');
