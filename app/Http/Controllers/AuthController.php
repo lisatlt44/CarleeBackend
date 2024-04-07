@@ -68,17 +68,12 @@ class AuthController extends Controller
 
     $user = User::create(array_merge(
       $validator->validated(),
-      ['password' => Hash::make($request->password)]
+      ['password' => Hash::make($request->password), 'is_active' => true]
     ));
 
     $token = auth()->login($user);
 
     return $this->createNewToken($token);
-
-    // return response()->json([
-    //   'message' => 'L\'utilisateur a correctement été enregistré.',
-    //   'user' => $user
-    // ], 201);
   }
 
   /**
