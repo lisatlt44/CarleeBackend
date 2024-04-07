@@ -21,7 +21,7 @@ Route::group([
   'middleware' => 'api',
   'prefix' => 'auth'
 ], function ($router) {
-  // Les routes définies ci-dessous sont préfixées par /auth donc /auth/api
+  // Les routes définies ci-dessous sont préfixées par /auth donc api/auth
   Route::post('/login', '\App\Http\Controllers\AuthController@login');
   Route::post('/register', '\App\Http\Controllers\AuthController@register');
   Route::post('/logout', '\App\Http\Controllers\AuthController@logout');
