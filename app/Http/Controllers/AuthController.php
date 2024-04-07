@@ -71,10 +71,14 @@ class AuthController extends Controller
       ['password' => Hash::make($request->password)]
     ));
 
-    return response()->json([
-      'message' => 'L\'utilisateur a correctement été enregistré.',
-      'user' => $user
-    ], 201);
+    $token = auth()->login($user);
+
+    return $this->createNewToken($token);
+
+    // return response()->json([
+    //   'message' => 'L\'utilisateur a correctement été enregistré.',
+    //   'user' => $user
+    // ], 201);
   }
 
   /**
