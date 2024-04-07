@@ -7,6 +7,7 @@ use App\Models\Car;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\CarPictureController;
 use Illuminate\Support\Str;
+use Validator;
 
 class CarController extends Controller
 {
