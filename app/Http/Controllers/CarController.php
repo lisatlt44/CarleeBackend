@@ -43,7 +43,7 @@ class CarController extends Controller
    * @param int $userId
    * @return \Illuminate\Http\JsonResponse
    */
-  public function getUserCars($userId)
+  public function index($userId)
   {
     // Récupération de la.les voiture.s de l'utilisateur en fonction de son ID
     $cars = Car::where('user_id', $userId)->get();
