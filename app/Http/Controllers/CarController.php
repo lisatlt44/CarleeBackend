@@ -38,6 +38,21 @@ class CarController extends Controller
   }
 
   /**
+   * Affiche les voitures d'un utilisateur spécifique.
+   *
+   * @param int $userId
+   * @return \Illuminate\Http\JsonResponse
+   */
+  public function getUserCars($userId)
+  {
+    // Récupération de la.les voiture.s de l'utilisateur en fonction de son ID
+    $cars = Car::where('user_id', $userId)->get();
+
+    // Réponse avec les détails de la voiture
+    return response()->json($cars);
+  }
+
+  /**
    * Crée une nouvelle voiture à partir des données fournies dans la requête.
    *
    * @param \Illuminate\Http\Request $request
