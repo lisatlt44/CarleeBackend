@@ -83,10 +83,10 @@ class CarController extends Controller
     // Création d'une nouvelle voiture
     $car = new Car();
     $car->name = Str::ucfirst($request->input('name'));
-    $car->brand = $request->input('brand');
-    $car->model = $request->input('model');
+    $car->brand = Str::ucfirst($request->input('brand'));
+    $car->model = Str::ucfirst($request->input('model'));
     $car->color = $request->input('color');
-    $car->fuel_type = $request->input('fuel_type');
+    $car->fuel_type = Str::ucfirst($request->input('fuel_type'));
     $car->production_date = $request->input('production_date');
     $car->country_iso_code = $request->input('country_iso_code');
     $car->plate_number = $request->input('plate_number');

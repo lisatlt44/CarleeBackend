@@ -37,6 +37,21 @@ class DocumentController extends Controller
   }
 
   /**
+   * Affiche les documents d'une voiture spécifique.
+   *
+   * @param int $carId
+   * @return \Illuminate\Http\JsonResponse
+   */
+  public function index($carId)
+  {
+    // Récupération de la.les voiture.s de l'utilisateur en fonction de son ID
+    $document = DOcument::where('car_id', $carId)->get();
+
+    // Réponse avec les détails de la voiture
+    return response()->json($document);
+  }
+
+  /**
    * Crée un nouveau document à partir des données fournies dans la requête.
    *
    * @param \Illuminate\Http\Request $request

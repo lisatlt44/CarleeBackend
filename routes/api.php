@@ -49,6 +49,7 @@ Route::middleware('auth:api')->group(function () {
 Route::middleware('auth:api')->group(function () {
   // CRUD operations for documents
   Route::get('/documents/{id}', '\App\Http\Controllers\DocumentController@show');
+  Route::get('/cars/{carId}/documents', '\App\Http\Controllers\DocumentController@index');
   Route::post('/documents', '\App\Http\Controllers\DocumentController@store');
   Route::put('/documents/{id}', '\App\Http\Controllers\DocumentController@update');
   Route::delete('/documents/{id}', '\App\Http\Controllers\DocumentController@destroy');
