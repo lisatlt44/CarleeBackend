@@ -46,7 +46,7 @@ class CarController extends Controller
   public function index($userId)
   {
     // Récupération de la.les voiture.s de l'utilisateur en fonction de son ID
-    $cars = Car::where('user_id', $userId)->get();
+    $cars = Car::where('user_id', $userId)->where('is_active', true)->get();
 
     // Réponse avec les détails de la voiture
     return response()->json($cars);
