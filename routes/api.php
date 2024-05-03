@@ -62,3 +62,9 @@ Route::middleware('auth:api')->group(function () {
   Route::post('/car-pictures', '\App\Http\Controllers\CarPictureController@store');
   Route::delete('/car-pictures/{id}', '\App\Http\Controllers\CarPictureController@destroy');
 });
+
+Route::middleware('auth:api')->group(function () {
+  // CRUD operations for car_pictures
+  Route::get('/indicators', '\App\Http\Controllers\CarPictureController@index');
+  Route::get('/indicators/{id}', '\App\Http\Controllers\CarPictureController@show');
+});
