@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Indicator;
+use App\Models\Reminder;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Str;
 use Validator;
