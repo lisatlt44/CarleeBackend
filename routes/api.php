@@ -65,6 +65,6 @@ Route::middleware('auth:api')->group(function () {
 
 Route::middleware('auth:api')->group(function () {
   // CRUD operations for car_pictures
-  Route::get('/indicators', '\App\Http\Controllers\CarPictureController@index');
-  Route::get('/indicators/{id}', '\App\Http\Controllers\CarPictureController@show');
+  Route::get('/indicators', '\App\Http\Controllers\IndicatorController@index');
+  Route::get('/indicators/{id}', '\App\Http\Controllers\IndicatorController@show');
 });
