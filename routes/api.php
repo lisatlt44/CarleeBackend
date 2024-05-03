@@ -64,7 +64,13 @@ Route::middleware('auth:api')->group(function () {
 });
 
 Route::middleware('auth:api')->group(function () {
-  // CRUD operations for car_pictures
+  // CRUD operations for indicators
   Route::get('/indicators', '\App\Http\Controllers\IndicatorController@index');
   Route::get('/indicators/{id}', '\App\Http\Controllers\IndicatorController@show');
+});
+
+Route::middleware('auth:api')->group(function () {
+  // CRUD operations for reminders
+  Route::get('/reminders', '\App\Http\Controllers\ReminderController@index');
+  Route::get('/reminders/{id}', '\App\Http\Controllers\ReminderController@show');
 });
