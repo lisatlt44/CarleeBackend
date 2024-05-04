@@ -35,12 +35,12 @@ class ReminderController extends Controller
    }
 
 
-  public function show($id)
+  public function show($carId)
   {
     // Recherche du rappel par ID
-    $reminder = Reminder::findOrFail($id);
+    $reminder = Reminder::where('car_id', $carId)->get();
 
-    // Réponse avec les détails du voyant
+    // Réponse avec les détails du rappel
     return response()->json($reminder);
   }
 }

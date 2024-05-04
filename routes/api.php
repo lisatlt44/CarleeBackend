@@ -72,5 +72,5 @@ Route::middleware('auth:api')->group(function () {
 Route::middleware('auth:api')->group(function () {
   // CRUD operations for reminders
   Route::get('/reminders', '\App\Http\Controllers\ReminderController@index');
-  Route::get('/reminders/{id}', '\App\Http\Controllers\ReminderController@show');
+  Route::get('/reminders/{carId}', '\App\Http\Controllers\ReminderController@show');
 });
